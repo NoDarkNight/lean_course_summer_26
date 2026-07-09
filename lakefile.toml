@@ -11,13 +11,13 @@ weak.linter.mathlibStandardSet = true
 maxSynthPendingDepth = 3
 
 [[require]]
-name = "mathlib"
-scope = "leanprover-community"
-
-[[require]]
 name = "verso-slides"
 git = "https://github.com/leanprover/verso-slides.git"
 rev = "main"
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
 
 [[lean_lib]]
 name = "LeanCourseSummer26"
