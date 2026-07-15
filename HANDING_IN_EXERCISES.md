@@ -1,7 +1,10 @@
 # Handing in Exercise Solutions
 
 Use one pull request per exercise sheet. Replace `n` by the sheet number and
-replace `your-name` by your name. 
+replace `your-name` by your name.
+
+0. Send me a DM on Discord or an email with a link to your GitHub profile, so
+   that I can add you as a contributor to the repository.
 
 1. Make sure you are on the `master` branch:
 
@@ -42,7 +45,7 @@ replace `your-name` by your name.
    git push --set-upstream origin HEAD
    ```
 
-7. Go to the GitHub repository in your web browser and create a pull request from your branch into
-   `master`.
+7. Go to the GitHub repository in your web browser and create a pull request
+   from your branch into `master`.
 
 8. Select your TA as reviewer.
