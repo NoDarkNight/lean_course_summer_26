@@ -11,7 +11,7 @@ Your first task is to prove lemmas 0-3 from the lecture notes.
 
 section -- More on divisiblity
 
-theorem exercise0 {d k n : ℕ} (hd : d ≠ 1) (h : n = d * k) : d < n := by
+theorem exercise0 {d k n : ℕ} (hn : n ≠ 0) (hd : d ≠ 1) (h : n = d * k) : k < n := by
   sorry
 
 theorem exercise1 {d n : ℕ} (hd : d ≠ 1) (h : d ∣ n) : ¬ (d ∣ n + 1):= by
