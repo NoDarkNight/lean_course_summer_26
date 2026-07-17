@@ -77,6 +77,7 @@ Finally, to use a hypothesis h : ∃ x, P x, we can use the 'rcases' tactic to o
 a witness x : T and a proof h' : P x.
 -/
 
+
 theorem exercise6 (n : Nat) (h : ∃ k, n = 2 * k) : ∃ l, n*n = 4 * l := by
   rcases h with ⟨k, hk⟩
   rw[hk, Nat.mul_assoc, Nat.mul_comm k (2*k), Nat.mul_assoc, ← Nat.mul_assoc]

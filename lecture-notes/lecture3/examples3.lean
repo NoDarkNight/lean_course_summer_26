@@ -18,7 +18,7 @@ variable {n m p d : ℕ}
 
 #check p.Prime
 
-#check Nat.prime_def
+#check (Nat.dvd_prime )
 
 theorem example1 (hn : d ∣ n) (hm : d ∣ m) : d ∣ n + m := by
   rcases hn with ⟨k, hk⟩
@@ -33,13 +33,14 @@ theorem example3 (h : n > 1) : n * n > n := by
 theorem example4 (hp : p.Prime) : ¬ ((p * p).Prime) := by
   have hpneq1 : p ≠ 1 := by
     exact Nat.Prime.ne_one hp
-  have h : p ≠ p * p := by
+  have hpneqp2 : p ≠ p * p := by
     apply Nat.ne_of_lt
     exact Nat.lt_mul_self_iff.mpr (Nat.Prime.one_lt hp)
   by_contra h
   have h1 : p ∣ p * p := by
     use p
-  have hpdvd : p = 1 ∨ p = p * p := by exact (Nat.dvd_prime h).mp h1
+  have hpdvd : p = 1 ∨ p = p * p := by
+    exact (Nat.dvd_prime h).mp h1
   cases hpdvd with
   | inl hp1 => contradiction
   | inr hp2 => contradiction
@@ -99,7 +100,7 @@ end
 section -- Complete Induction
 variable (P : ℕ → Prop)
 
-def complete_induction : Prop :=  (P 0 ∧ (∀ n, (∀ m, m ≤ n → P m) → P (n + 1))) → ∀ n, P n
+def complete_induction (P : ℕ → Prop) : Prop :=  (P 0 ∧ (∀ n, (∀ m, m ≤ n → P m) → P (n + 1))) → ∀ n, P n
 
 def Q (P : ℕ → Prop) (n : ℕ) : Prop := ∀ m, m ≤ n → P m
 
@@ -117,13 +118,11 @@ lemma P_of_Q : (∀ n, Q P n) -> ∀ n, P (n) := by
 
 theorem induction_implies_complete_induction : complete_induction P := by
   intro ⟨hP0, hQP⟩
-  have hQall : ∀ n, Q P n := by
-    intro n
-    induction n with
-    | zero =>
-        exact Q_zero_of_P_zero P hP0
-    | succ n ih =>
-        exact Q_succ_of_Q_n_of_P_succ_of_Q_n P n (hQP n) ih
+  apply P_of_Q P
   intro n
-  exact P_of_Q P hQall n
+  induction n with
+  | zero =>
+      exact Q_zero_of_P_zero P hP0
+  | succ n ih =>
+      exact Q_succ_of_Q_n_of_P_succ_of_Q_n P n (hQP n) ih
 end
