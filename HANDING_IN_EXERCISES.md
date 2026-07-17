@@ -49,3 +49,53 @@ replace `your-name` by your name.
    from your branch into `master`.
 
 8. Select your TA as reviewer.
+
+## If `master` was updated after you started working
+
+If you already started solving the exercises and there were updates on the
+`master` branch, update your exercise branch before continuing with the
+exercises.
+
+1. Commit your current work:
+
+   ```bash
+   git add .
+   git commit -m "wip"
+   ```
+
+2. Go back to the `master` branch:
+
+   ```bash
+   git checkout master
+   ```
+
+3. Pull the latest version:
+
+   ```bash
+   git pull
+   ```
+
+4. Go back to your exercise branch:
+
+   ```bash
+   git checkout exercise-n-your-name
+   ```
+
+5. Rebase your exercise branch onto the updated `master` branch:
+
+   ```bash
+   git rebase master
+   ```
+
+6. If Git reports conflicts, resolve them using the graphical merge editor in
+   VS Code. After resolving the conflicts, you can use the graphical interface
+   of the VS Code merge editor to continue/complete the rebase.
+
+   Alternatively, use the commands:
+
+   ```bash
+   git add .
+   git rebase --continue
+   ```
+
+7. Once you are finished solving the exercises, continue with step 5 of handing in exercises.
