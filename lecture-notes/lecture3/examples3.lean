@@ -86,7 +86,7 @@ theorem Gauss_sum' (n : ℕ) : ∑ i ∈ Finset.range (n + 1) , i  = (n * (n + 1
 
 /-
 We have to decide if we want to prove the theorem in ℕ or in ℚ.
-The types ℕ and ℚ are different, so we have to be aware of the meaning of the symbolds
+The types ℕ and ℚ are different, so we have to be aware of the meaning of the symbols
 in each of those contexts.
 Below is a sneak peak for next week, when we will talk about sets/subtypes. In particular,
 the above theorem implies that n * (n + 1)/2 ∈ NatinRat.

@@ -10,20 +10,14 @@ theorem exercise1 : (¬(P ∧ Q) ↔ ¬ P ∨ ¬ Q) := by
   constructor
   · intro h
     by_cases hp : P
-    case pos =>
-      by_cases hq : Q
-      case pos =>
-        exact absurd ⟨hp, hq⟩ h
-      case neg =>
-        right; exact hq
-    case neg =>
-      left; exact hp
+    · right;
+      intro hq;
+      exact h ⟨hp, hq⟩
+    · left; exact hp
   · intro h hpq
     cases h with
-    | inl hnp =>
-      exact (hnp hpq.left)
-    | inr hnq =>
-      exact (hnq hpq.right)
+    | inl hnp => exact (hnp hpq.left)
+    | inr hnq => exact (hnq hpq.right)
 
 theorem exercise2 (h : P ∨ Q) (hp : ¬ P) : Q := by
   cases h with

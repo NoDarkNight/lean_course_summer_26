@@ -43,6 +43,7 @@ replace `your-name` by your name.
 
    ```bash
    git push --set-upstream origin HEAD
+   git push --set-upstream fork HEAD
    ```
 
 7. Go to the GitHub repository in your web browser and create a pull request
