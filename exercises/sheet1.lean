@@ -10,20 +10,14 @@ theorem exercise1 : (¬(P ∧ Q) ↔ ¬ P ∨ ¬ Q) := by
   constructor
   · intro h
     by_cases hp : P
-    case pos =>
-      by_cases hq : Q
-      case pos =>
-        exact absurd ⟨hp, hq⟩ h
-      case neg =>
-        right; exact hq
-    case neg =>
-      left; exact hp
+    · right
+      intro hq
+      exact h ⟨hp, hq⟩
+    · left; exact hp
   · intro h hpq
     cases h with
-    | inl hnp =>
-      exact (hnp hpq.left)
-    | inr hnq =>
-      exact (hnq hpq.right)
+    | inl hnp => exact (hnp hpq.left)
+    | inr hnq => exact (hnq hpq.right)
 
 theorem exercise2 (h : P ∨ Q) (hp : ¬ P) : Q := by
   cases h with
@@ -31,6 +25,11 @@ theorem exercise2 (h : P ∨ Q) (hp : ¬ P) : Q := by
     exact absurd hp' hp
   | inr hq =>
     exact hq
+
+theorem exercise2' (h : P ∨ Q) (hp : ¬ P) : Q := by
+  rcases h with hp' | hq
+  · contradiction
+  · exact hq
 
 end
 
@@ -47,7 +46,6 @@ Thus, we can apply h : ∀ x, P x to an arbitrary element x : T to obtain a proo
 
 theorem exercise3 (h : ∀ x, P x) (x : T) : P x := by
   exact h x
-
 
 /-
 Whenever we want to prove a universally quantified statement ∀ x, P x,
@@ -77,6 +75,7 @@ theorem exercise5 (h : ∀ x, P x) (y : T) : ∃ y, P y := by
 Finally, to use a hypothesis h : ∃ x, P x, we can use the 'rcases' tactic to obtain
 a witness x : T and a proof h' : P x.
 -/
+
 
 theorem exercise6 (n : Nat) (h : ∃ k, n = 2 * k) : ∃ l, n*n = 4 * l := by
   rcases h with ⟨k, hk⟩
