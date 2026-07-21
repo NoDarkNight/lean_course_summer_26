@@ -10,8 +10,8 @@ theorem exercise1 : (¬(P ∧ Q) ↔ ¬ P ∨ ¬ Q) := by
   constructor
   · intro h
     by_cases hp : P
-    · right;
-      intro hq;
+    · right
+      intro hq
       exact h ⟨hp, hq⟩
     · left; exact hp
   · intro h hpq
@@ -46,7 +46,6 @@ Thus, we can apply h : ∀ x, P x to an arbitrary element x : T to obtain a proo
 
 theorem exercise3 (h : ∀ x, P x) (x : T) : P x := by
   exact h x
-
 
 /-
 Whenever we want to prove a universally quantified statement ∀ x, P x,
