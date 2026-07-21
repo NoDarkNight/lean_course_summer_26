@@ -8,8 +8,12 @@ import Std
 
 -- Example 1
 theorem example1 (n : Nat) : n * Nat.succ 0 = n := by
-  rw [Nat.mul_succ]
-  rw[Nat.mul_zero]
+  rw[Nat.mul_succ]
+
+
+
+  --rw [Nat.mul_succ]
+  --rw[Nat.mul_zero]
   sorry
 
 -- Example 2

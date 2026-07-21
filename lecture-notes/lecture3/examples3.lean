@@ -6,7 +6,6 @@ import Mathlib.Data.Rat.Defs
 import Mathlib.Algebra.BigOperators.Group.Finset.Defs
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
-
 section -- Divisiblity
 
 variable {n m p d : ℕ}
@@ -100,21 +99,33 @@ end
 section -- Complete Induction
 variable (P : ℕ → Prop)
 
-def complete_induction (P : ℕ → Prop) : Prop :=  (P 0 ∧ (∀ n, (∀ m, m ≤ n → P m) → P (n + 1))) → ∀ n, P n
+def complete_induction (P : ℕ → Prop) : Prop :=
+  (P 0 ∧ (∀ n, (∀ m, m ≤ n → P m) → P (n + 1))) → ∀ n, P n
 
 def Q (P : ℕ → Prop) (n : ℕ) : Prop := ∀ m, m ≤ n → P m
 
 lemma Q_zero_of_P_zero : P 0 → Q P 0 := by
-  sorry
+  intro hP0 m hm
+  rw[Nat.eq_zero_of_le_zero hm]
+  exact hP0
 
 lemma P_n_of_Q_n (n : ℕ) : Q P n -> P n := by
-  sorry
+  intro hQ
+  exact hQ n (Nat.le_refl n)
 
 lemma Q_succ_of_Q_n_of_P_succ_of_Q_n (n : ℕ) : (Q P n -> P (n + 1)) -> (Q P n -> Q P (n + 1)) := by
-  sorry
+  intro hPsucc hQ m hm
+  by_cases hmn : m ≤ n
+  · exact hQ m hmn
+  · have hmn' : m = n + 1 := by
+      push Not at hmn
+      exact Eq.symm (Nat.le_antisymm hmn hm)
+    rw[hmn']
+    exact hPsucc hQ
 
 lemma P_of_Q : (∀ n, Q P n) -> ∀ n, P (n) := by
-  sorry
+  intro hQ n
+  exact P_n_of_Q_n P n (hQ n)
 
 theorem induction_implies_complete_induction : complete_induction P := by
   intro ⟨hP0, hQP⟩

@@ -23,6 +23,9 @@ scope = "leanprover-community"
 name = "LeanCourseSummer26"
 
 [[lean_lib]]
+name = "Exercises"
+
+[[lean_lib]]
 name = "Lecture1Slides"
 srcDir = "lecture-notes"
 roots = ["lecture1.lecture1"]
